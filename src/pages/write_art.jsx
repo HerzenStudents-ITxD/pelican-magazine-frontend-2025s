@@ -11,15 +11,82 @@ const Writeart = () => {
 
   return (
     <div className="container-fluid p-4" style={{ backgroundColor: "#f7f9fc", minHeight: "100vh" }}>
-      {/* Шапка */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 style={{ color: "#003399", fontWeight: "bold" }}>ПЕЛИКАН</h2>
-        <div>
-          <button className="btn btn-link" onClick={() => navigate("/mainreg")}>Статьи</button>
-          <button className="btn btn-link">Авторы</button>
-          <button className="btn btn-link">Конспекты</button>
-          <button className="btn btn-outline-primary me-2" onClick={() => navigate("/profile")}>Профиль</button>
-          <button className="btn btn-outline-primary" onClick={() => navigate("/main")}>Выйти</button>
+      {/* Верхняя навигационная панель */}
+      <div className="d-flex justify-content-between align-items-center py-3 border-bottom">
+        {/* Логотип с правым отступом */}
+        <img 
+          src="/logo_black.jpg" 
+          alt="pelikan logo" 
+          className="me-5" // Отступ справа 3rem
+          style={{ 
+            width: '120px',
+            height: 'auto',
+            objectFit: 'contain'
+          }}
+        />
+        
+        {/* Навигационные кнопки с отступами */}
+        <div className="d-flex align-items-center" style={{ gap: '2rem' }}>
+          <button 
+            type="button" 
+            className="btn btn-link p-0"
+            onClick={() => navigate("/main")}
+            style={{ 
+              fontWeight: 500,
+              color: '#003896' // Темно-синий цвет
+            }}
+          >
+            Статьи
+          </button>
+          <button 
+            type="button" 
+            className="btn btn-link p-0"
+            style={{ 
+              fontWeight: 500,
+              color: '#003896' // Темно-синий цвет
+            }}
+          >
+            Авторы
+          </button>
+          <button 
+            type="button" 
+            className="btn btn-link p-0 me-4" // Добавлен правый отступ
+            style={{ 
+              fontWeight: 500,
+              color: '#003896' // Темно-синий цвет
+            }}
+          >
+            Конспекты
+          </button>
+        </div>
+        
+        {/* Кнопки авторизации с отступами */}
+        <div className="d-flex align-items-center ms-auto" style={{ gap: '1rem' }}>
+          <button 
+            type="button" 
+            className="btn btn-outline-primary px-4 py-1"
+            onClick={() => navigate("/profile")}
+            style={{ 
+              borderRadius: '20px',
+              borderColor: '#003896', // Темно-синяя обводка
+              color: '#003896' // Темно-синий текст
+            }}
+          >
+            Профиль
+          </button>
+          <button 
+            type="button" 
+            className="btn btn-primary px-4 py-1"
+            onClick={() => navigate("/main")}
+            style={{ 
+              borderRadius: '20px',
+              backgroundColor: '#003896', // Темно-синий фон
+              color: 'white', // Белый текст
+              border: 'none'
+            }}
+          >
+            Выйти
+          </button>
         </div>
       </div>
 
