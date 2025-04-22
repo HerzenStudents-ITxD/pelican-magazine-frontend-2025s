@@ -11,6 +11,7 @@ import New_password from './pages/new_password';
 import Profile from './pages/profile';
 import Editprof from './pages/prof_sett';
 import Writeart from './pages/write_art';
+import Readart from './pages/read_art';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/newpass" element={<New_password />} />
         <Route path="/editprof" element={<Editprof />} />
         <Route path="/writeart" element={<Writeart />} />
+        <Route path="/readart" element={<Readart />} />
       </Routes>
     </div>
   );
