@@ -58,18 +58,6 @@ const Profile = () => {
         <div className="d-flex align-items-center ms-auto" style={{ gap: '1rem' }}>
           <button 
             type="button" 
-            className="btn btn-outline-primary px-4 py-1"
-            onClick={() => navigate("/profile")}
-            style={{ 
-              borderRadius: '20px',
-              borderColor: '#003896',
-              color: '#003896'
-            }}
-          >
-            Профиль
-          </button>
-          <button 
-            type="button" 
             className="btn btn-primary px-4 py-1"
             onClick={() => navigate("/main")}
             style={{ 
@@ -81,6 +69,14 @@ const Profile = () => {
           >
             Выйти
           </button>
+          <button 
+              type="button" 
+              className="btn btn-link p-0"
+              onClick={() => navigate("/editprof")}
+              style={{ padding: '5px' }}
+            >
+              <img src="/settings.jpg" alt="Настройки" style={{ width: '24px', height: '24px' }} />
+            </button>
         </div>
       </div>
 
@@ -114,7 +110,7 @@ const Profile = () => {
               backgroundColor: 'rgba(255,255,255,0.7)',
               borderRadius: '10px'
             }}>
-              Мура Мура Мура Мура Я Еще Не Отчислилась Урбабабабабаба
+              Мур Мур Мур Мур Я Еще Не Отчислилась Ураааааааааааааа
             </p>
             
             
@@ -125,14 +121,6 @@ const Profile = () => {
         <div className="col-md-8">
           {/* Панель действий */}
           <div className="d-flex align-items-center mb-4" style={{ gap: '15px' }}>
-            <button 
-              type="button" 
-              className="btn btn-link p-0"
-              onClick={() => navigate("/editprof")}
-              style={{ padding: '5px' }}
-            >
-              <img src="/settings.jpg" alt="Настройки" style={{ width: '24px', height: '24px' }} />
-            </button>
             <button 
               type="button" 
               className="btn btn-link p-0"
@@ -153,6 +141,7 @@ const Profile = () => {
           {/* Превью статьи (одна статья) */}
           <div className="mb-4">
             <Article_preview />
+            
           </div>
         </div>
       </div>
