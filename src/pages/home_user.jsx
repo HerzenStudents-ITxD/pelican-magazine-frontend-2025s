@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import Article_preview from '../components/article_prev';
+import Avatar from '../components/avatar';
 
 const Homereg = () => {
   const navigate = useNavigate();

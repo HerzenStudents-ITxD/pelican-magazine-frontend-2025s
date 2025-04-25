@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Avatar from '../components/avatar';
 
 const Readart = () => {
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ const Readart = () => {
       <div className="row">
         {/* Левая колонка */}
         <div className="col-md-3 text-center mb-4">
-          <img src="/avatar.jpg" alt="Аватар" className="img-fluid rounded-circle mb-2" style={{ maxWidth: "150px" }} />
+          <Avatar />
           <h5>Автор</h5>
           <div className="my-3">
             <p style={{ fontWeight: "bold" }}>Темы этой статьи</p>

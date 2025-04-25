@@ -1,10 +1,24 @@
 import React from "react";
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import apiClient from '../api/client';
 
 const Article_preview = () => {
   const navigate = useNavigate(); // Добавлен хук useNavigate
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await apiClient.get('/users');
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    }
+    fetchUsers();
+  }, []);
   
   return (
     <Card style={{ width: "18rem" }}>

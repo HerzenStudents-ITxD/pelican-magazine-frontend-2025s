@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Article_preview from '../components/article_prev';
+import Avatar from '../components/avatar';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -90,16 +91,7 @@ const Profile = () => {
             padding: '20px',
             textAlign: 'center'
           }}>
-            <img 
-              src="/avatar.jpg" 
-              alt="Аватар" 
-              className="img-fluid rounded-circle mb-3" 
-              style={{ 
-                maxWidth: '150px',
-                border: '3px solid white',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }} 
-            />
+            <Avatar />
             <h4 style={{ fontWeight: 'bold', marginBottom: '5px' }}>Черепанова Мария</h4>
             <p style={{ color: '#666', marginBottom: '20px' }}>Санкт-Петербург / ИТвД / 3 Курс</p>
             
