@@ -3,82 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Article_preview from '../components/article_prev';
 import Avatar from '../components/avatar';
+import Top_users from '../components/top_users';
+
 
 const Profile = () => {
   const navigate = useNavigate();
   
   return (
     <div className="container-fluid px-4" style={{ backgroundColor: 'white' }}>
-      {/* Верхняя навигационная панель (оставлена без изменений) */}
-      <div className="d-flex justify-content-between align-items-center py-3 border-bottom">
-        <img 
-          src="/logo_black.jpg" 
-          alt="pelikan logo" 
-          className="me-5"
-          style={{ 
-            width: '120px',
-            height: 'auto',
-            objectFit: 'contain'
-          }}
-        />
-        
-        <div className="d-flex align-items-center" style={{ gap: '2rem' }}>
-          <button 
-            type="button" 
-            className="btn btn-link p-0"
-            onClick={() => navigate("/main")}
-            style={{ 
-              fontWeight: 500,
-              color: '#003896'
-            }}
-          >
-            Статьи
-          </button>
-          <button 
-            type="button" 
-            className="btn btn-link p-0"
-            style={{ 
-              fontWeight: 500,
-              color: '#003896'
-            }}
-          >
-            Авторы
-          </button>
-          <button 
-            type="button" 
-            className="btn btn-link p-0 me-4"
-            style={{ 
-              fontWeight: 500,
-              color: '#003896'
-            }}
-          >
-            Конспекты
-          </button>
-        </div>
-        
-        <div className="d-flex align-items-center ms-auto" style={{ gap: '1rem' }}>
-          <button 
-            type="button" 
-            className="btn btn-primary px-4 py-1"
-            onClick={() => navigate("/main")}
-            style={{ 
-              borderRadius: '20px',
-              backgroundColor: '#003896',
-              color: 'white',
-              border: 'none'
-            }}
-          >
-            Выйти
-          </button>
-          <button 
-              type="button" 
-              className="btn btn-link p-0"
-              onClick={() => navigate("/editprof")}
-              style={{ padding: '5px' }}
-            >
-              <img src="/settings.jpg" alt="Настройки" style={{ width: '24px', height: '24px' }} />
-            </button>
-        </div>
+      <div className="mt-4">
+        <Top_users />
       </div>
 
       {/* Основное содержимое профиля */}

@@ -2,8 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
-
-const Top_users = () => {
+const Top_guests = () => {
   const navigate = useNavigate();
   
   return (
@@ -60,19 +59,19 @@ const Top_users = () => {
           <button 
             type="button" 
             className="btn btn-outline-primary px-4 py-1"
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate("/register")}
             style={{ 
               borderRadius: '20px',
               borderColor: '#003896', // Темно-синяя обводка
               color: '#003896' // Темно-синий текст
             }}
           >
-            Профиль
+            Зарегистрироваться
           </button>
           <button 
             type="button" 
             className="btn btn-primary px-4 py-1"
-            onClick={() => navigate("/main")}
+            onClick={() => navigate("/signin")}
             style={{ 
               borderRadius: '20px',
               backgroundColor: '#003896', // Темно-синий фон
@@ -80,11 +79,11 @@ const Top_users = () => {
               border: 'none'
             }}
           >
-            Выйти
+            Войти
           </button>
         </div>
       </div>
   );
 };
 
-export default Top_users;
+export default Top_guests;
