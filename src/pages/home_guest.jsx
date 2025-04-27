@@ -14,7 +14,6 @@ const Home = () => {
         <Top_guests />
       </div>
 
-      {/* Основное содержимое страницы */}
       <div className="mt-4">
         <Article_preview />
       </div>
