@@ -12,6 +12,7 @@ import Profile from './pages/profile';
 import Editprof from './pages/prof_sett';
 import Writeart from './pages/write_art';
 import Readart from './pages/read_art';
+import ModeratorDashboard from './pages/ModeratorDashboard'; // или путь, где лежит файл
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/main" replace />} /> {/* Перенаправление */}
         <Route path="/main" element={<Home />} />
+        <Route path="/moderator" element={<ModeratorDashboard />} />
         <Route path="/mainreg" element={<Homereg />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signin" element={<Sign_in_page />} />
