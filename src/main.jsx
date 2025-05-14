@@ -6,8 +6,8 @@ import { BrowserRouter } from 'react-router'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <BrowserRouter basename="/pelican-magazine-frontend-2025s/">
+        <App />
+      </BrowserRouter>
   </StrictMode>,
 )
