@@ -6,7 +6,7 @@ import Avatar from '../components/avatar';
 import Top_users from '../components/top_users';
 
 
-const Profile = () => {
+const Liked_arts = () => {
   const navigate = useNavigate();
   
   return (
@@ -50,22 +50,14 @@ const Profile = () => {
             <button 
               type="button" 
               className="btn btn-link p-0"
-              onClick={() => navigate("/writeart")}
+              onClick={() => navigate("/profile")}
               style={{ padding: '5px' }}
             >
-              <img src="/plus.jpg" alt="Добавить статью" style={{ width: '24px', height: '24px' }} />
+              <img src="/back.jpg" alt="Добавить статью" style={{ width: '24px', height: '24px' }} />
             </button>
-            <button 
-              type="button" 
-              className="btn btn-link p-0"
-              onClick={() => navigate("/likedarts")}
-              style={{ padding: '5px' }}
-            >
-              <img src="/hearth.jpg" alt="Избранное" style={{ width: '24px', height: '24px' }} />
-            </button>
+            <h3 style={{ color: '#003896' }}>Избранное</h3>
           </div>
 
-          {/* Превью статьи (одна статья) */}
           <div className="mb-4">
             <Article_preview />
             
@@ -76,4 +68,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Liked_arts;

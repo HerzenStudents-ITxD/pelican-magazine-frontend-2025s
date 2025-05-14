@@ -12,12 +12,13 @@ import Profile from './pages/profile';
 import Editprof from './pages/prof_sett';
 import Writeart from './pages/write_art';
 import Readart from './pages/read_art';
+import Liked_arts from './pages/liked_arts';
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Navigate to="/main" replace />} /> {/* Перенаправление */}
+        <Route path="/" element={<Navigate to="/main" replace />} />
         <Route path="/main" element={<Home />} />
         <Route path="/mainreg" element={<Homereg />} />
         <Route path="/profile" element={<Profile />} />
@@ -28,6 +29,7 @@ function App() {
         <Route path="/editprof" element={<Editprof />} />
         <Route path="/writeart" element={<Writeart />} />
         <Route path="/readart" element={<Readart />} />
+        <Route path="/likedarts" element={<Liked_arts />} />
       </Routes>
     </div>
   );

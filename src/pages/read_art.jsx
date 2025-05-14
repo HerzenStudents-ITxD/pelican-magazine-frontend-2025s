@@ -6,10 +6,15 @@ import Top_users from '../components/top_users';
 
 const Readart = () => {
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [section1, setSection1] = useState("");
   const [section2, setSection2] = useState("");
+
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
 
   return ( 
     <div className="container-fluid px-4">
@@ -18,10 +23,10 @@ const Readart = () => {
       </div>
 
       <div className="row">
-        {/* Левая колонка */}
+        {/* Левая колонка с аватаром и информацией */}
         <div className="col-md-3 text-center mb-4">
           <Avatar />
-          <h5>Автор</h5>
+          <h5>Автор статьи</h5>
           <div className="my-3">
             <p style={{ fontWeight: "bold" }}>Темы этой статьи</p>
             <button className="btn btn-outline-primary btn-sm m-1">Искусство</button>
@@ -30,12 +35,9 @@ const Readart = () => {
           </div>
           <p style={{ fontWeight: "bold" }}>Возрастное ограничение</p>
           <div className="d-flex flex-wrap justify-content-center">
-            {["18+"].map((age, i) => (
-              <button key={i} className="btn btn-outline-primary btn-sm m-1">{age}</button>
-            ))}
+            <button className="btn btn-outline-primary btn-sm m-1">18+</button>
           </div>
           
-          {/* Добавленные кнопки */}
           <div className="mt-4 d-flex flex-column">
             <button 
               className="btn btn-outline-primary mb-2"
@@ -52,8 +54,9 @@ const Readart = () => {
           </div>
         </div>
 
-        {/* Центральная часть */}
+        {/* Центральная часть с содержанием статьи */}
         <div className="col-md-9">
+          {/* Заголовок статьи */}
           <div className="p-4 mb-4" style={{ 
             background: "linear-gradient(to right, #2c3e50, #3498db)", 
             borderRadius: "10px", 
@@ -68,6 +71,7 @@ const Readart = () => {
             <p style={{ fontSize: "0.9rem", opacity: "0.8" }}>опубликовано 33 декабря 3021г</p>
           </div>
 
+          {/* Краткое содержание */}
           <div className="mb-4">
             <h4>Пересказ статьи за 1 минуту</h4>
             <p style={{ fontSize: "0.95rem", lineHeight: "1.6" }}>
@@ -77,6 +81,7 @@ const Readart = () => {
             </p>
           </div>
 
+          {/* Раздел 1 */}
           <div className="mb-4">
             <h4>Название раздела 1</h4>
             <p style={{ fontSize: "0.95rem", lineHeight: "1.6" }}>
@@ -87,6 +92,7 @@ const Readart = () => {
             </p>
           </div>
 
+          {/* Раздел 2 */}
           <div className="mb-4">
             <h4>Название раздела 2</h4>
             <p style={{ fontSize: "0.95rem", lineHeight: "1.6" }}>
@@ -95,6 +101,32 @@ const Readart = () => {
               Текст должен логически продолжать первый раздел.
               Здесь также может быть заключение или выводы по статье.
             </p>
+          </div>
+
+          {/* Кнопка лайка - добавлена под последним разделом */}
+          <div className="d-flex justify-content-end mb-4">
+            <button 
+              onClick={handleLikeClick}
+              style={{
+                border: 'none',
+                backgroundColor: 'transparent',
+                padding: 0,
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <img 
+                src={isLiked ? "/hearth2.jpg" : "/hearth.jpg"} 
+                alt="Лайк"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  display: 'block'
+                }}
+              />
+            </button>
           </div>
         </div>
       </div>

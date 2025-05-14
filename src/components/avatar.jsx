@@ -57,7 +57,7 @@ const Avatar = () => {
           //borderRadius: '50%',
           //border: '2px solid white',
           //boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-          transform: 'translate(25%, 25%)' // Сдвигаем на половину своего размера
+          transform: 'translate(25%, 25%)'
         }} 
       />
     </div>
