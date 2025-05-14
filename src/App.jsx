@@ -13,6 +13,12 @@ import Editprof from './pages/prof_sett';
 import Writeart from './pages/write_art';
 import Readart from './pages/read_art';
 
+
+import Liked_arts from './pages/liked_arts';
+
+import ModeratorDashboard from './pages/ModeratorDashboard'; // или путь, где лежит файл
+
+
 function App() {
   return (
     <div>
@@ -31,6 +37,10 @@ function App() {
         <Route path="/readart" element={<Readart />} />
         <Route path="/likedarts" element={<Liked_arts />} />
       </Routes>
+      <BrowserRouter basename="/pelican-magazine-frontend-2025s/">
+        <App />
+      </BrowserRouter>
+
     </div>
   );
 }
