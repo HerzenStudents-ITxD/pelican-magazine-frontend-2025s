@@ -12,8 +12,6 @@ import Profile from './pages/profile';
 import Editprof from './pages/prof_sett';
 import Writeart from './pages/write_art';
 import Readart from './pages/read_art';
-import Liked_arts from './pages/liked_arts';
-import ModeratorDashboard from './pages/ModeratorDashboard'; // или путь, где лежит файл
 
 function App() {
   return (
