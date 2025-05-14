@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/pelican-magazine-frontend-2025s/',
   plugins: [react()],
+  base: '/pelican-magazine/',
   server: {
     proxy: {
       '/api': {
