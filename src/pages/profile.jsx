@@ -53,7 +53,7 @@ const Profile = () => {
               onClick={() => navigate("/writeart")}
               style={{ padding: '5px' }}
             >
-              <img src="/plus.jpg" alt="Добавить статью" style={{ width: '24px', height: '24px' }} />
+              <img src="/pelican-magazine/plus.jpg" alt="Добавить статью" style={{ width: '24px', height: '24px' }} />
             </button>
             <button 
               type="button" 
@@ -61,7 +61,7 @@ const Profile = () => {
               onClick={() => navigate("/likedarts")}
               style={{ padding: '5px' }}
             >
-              <img src="/hearth.jpg" alt="Избранное" style={{ width: '24px', height: '24px' }} />
+              <img src="/pelican-magazine/hearth.jpg" alt="Избранное" style={{ width: '24px', height: '24px' }} />
             </button>
           </div>
 

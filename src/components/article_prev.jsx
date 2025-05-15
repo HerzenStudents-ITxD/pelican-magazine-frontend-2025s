@@ -22,7 +22,7 @@ const Article_preview = () => {
   
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="/lemons.jpg" />
+      <Card.Img variant="top" src="/pelican-magazine/lemons.jpg" />
       <Card.Body>
         <Button
           className="btn btn-link p-0"

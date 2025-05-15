@@ -118,7 +118,7 @@ const Readart = () => {
               onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
             >
               <img 
-                src={isLiked ? "/hearth2.jpg" : "/hearth.jpg"} 
+                src={isLiked ? "/pelican-magazine/hearth2.jpg" : "/pelican-magazine/hearth.jpg"} 
                 alt="Лайк"
                 style={{
                   width: '32px',

@@ -9,7 +9,7 @@ const Top_guests = () => {
       <div className="d-flex justify-content-between align-items-center py-3 border-bottom">
         {/* Логотип с правым отступом */}
         <img 
-          src="/logo_black.jpg" 
+          src="/pelican-magazine/logo_black.jpg" 
           alt="pelikan logo" 
           className="me-5" // Отступ справа 3rem
           style={{ 

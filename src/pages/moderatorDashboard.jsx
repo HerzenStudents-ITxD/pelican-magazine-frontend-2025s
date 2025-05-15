@@ -108,7 +108,7 @@ const ModeratorDashboard = () => {
     <div className="container-fluid px-4" style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       {/* Верхняя панель */}
       <div className="d-flex justify-content-between align-items-center py-3 border-bottom bg-white">
-        <img src="/logo_black.jpg" alt="pelikan logo" style={{ width: '120px' }} />
+        <img src="/pelican-magazine/logo_black.jpg" alt="pelikan logo" style={{ width: '120px' }} />
         <div className="d-flex" style={{ gap: '2rem' }}>
           {['Статьи', 'Авторы', 'Конспекты'].map((item, idx) => (
             <button key={idx} className="btn btn-link p-0" style={{ fontWeight: 500, color: PRIMARY_COLOR }}>

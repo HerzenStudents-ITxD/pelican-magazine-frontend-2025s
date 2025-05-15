@@ -53,7 +53,7 @@ const Liked_arts = () => {
               onClick={() => navigate("/profile")}
               style={{ padding: '5px' }}
             >
-              <img src="/back.jpg" alt="Добавить статью" style={{ width: '24px', height: '24px' }} />
+              <img src="/pelican-magazine/back.jpg" alt="Добавить статью" style={{ width: '24px', height: '24px' }} />
             </button>
             <h3 style={{ color: '#003896' }}>Избранное</h3>
           </div>

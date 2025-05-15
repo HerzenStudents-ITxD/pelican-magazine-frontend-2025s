@@ -33,7 +33,7 @@ const Avatar = () => {
         overflow: 'hidden'
       }}>
         <img 
-          src="/avatar.jpg" 
+          src="/pelican-magazine/avatar.jpg" 
           alt="Аватар" 
           style={{
             width: '100%',
@@ -45,7 +45,7 @@ const Avatar = () => {
       
       {/* Шляпа (полностью видна) */}
       <img 
-        src="/hat.jpg" 
+        src="/pelican-magazine/hat.jpg" 
         alt="Шляпа" 
         style={{
           position: 'absolute',

@@ -11,7 +11,7 @@ const Registration = () => {
         {/* Левая часть с фото */}
         <div className="col-md-6 d-none d-md-block p-0">
           <img 
-            src="/bg_registration.jpg" 
+            src="/pelican-magazine/bg_registration.jpg" 
             alt="registration background" 
             className="w-100 h-100" 
             style={{ 
