@@ -42,10 +42,8 @@ const Liked_arts = () => {
             
           </div>
         </div>
-
-        {/* Правая колонка с контентом */}
+        
         <div className="col-md-8">
-          {/* Панель действий */}
           <div className="d-flex align-items-center mb-4" style={{ gap: '15px' }}>
             <button 
               type="button" 

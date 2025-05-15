@@ -1,3 +1,5 @@
+
+
 import axios from 'axios';
 
 const apiClient = axios.create({
@@ -8,12 +10,10 @@ const apiClient = axios.create({
   }
 });
 
-// Добавьте интерцепторы при необходимости
 apiClient.interceptors.response.use(
   response => response,
   error => {
     if (error.response?.status === 401) {
-      // Обработка неавторизованных запросов
       console.error('Unauthorized request');
     }
     return Promise.reject(error);
@@ -21,4 +21,3 @@ apiClient.interceptors.response.use(
 );
 
 export default apiClient;
-
