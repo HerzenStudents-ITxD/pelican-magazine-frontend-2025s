@@ -1,161 +1,322 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './write_art.css';
+
+
+// Lexical редактор
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical';
+
+const Toolbar = () => {
+  const [editor] = useLexicalComposerContext();
+  const [showFonts, setShowFonts] = useState(false);
+  const [showSizes, setShowSizes] = useState(false);
+
+ const applyStyle = (style, value = null) => {
+  editor.update(() => {
+    const selection = $getSelection();
+    if ($isRangeSelection(selection)) {
+      const nodes = selection.getNodes();
+      for (const node of nodes) {
+        if (node.__type === 'text') {
+          if (style === 'font') {
+            node.setStyle(`font-family: ${value}`);
+          } else if (style === 'size') {
+            const sizeMap = {
+              small: '12px',
+              normal: '16px',
+              large: '20px',
+              huge: '24px',
+            };
+            node.setStyle(`font-size: ${sizeMap[value]}`);
+          } else {
+            node.toggleFormat?.(style);
+          }
+        }
+      }
+    }
+  });
+};
+
+  // Варианты шрифтов
+  const fonts = [
+    { name: 'Arial', value: 'Arial, sans-serif' },
+    { name: 'Times New Roman', value: '"Times New Roman", serif' },
+    { name: 'Courier New', value: '"Courier New", monospace' },
+    { name: 'Georgia', value: 'Georgia, serif' },
+    { name: 'Verdana', value: 'Verdana, sans-serif' }
+  ];
+
+  // Варианты размеров
+  const sizes = [
+    { name: 'Маленький', value: 'small' },
+    { name: 'Обычный', value: 'normal' },
+    { name: 'Большой', value: 'large' },
+    { name: 'Огромный', value: 'huge' }
+  ];
+
+  return (
+    <div className="editor-toolbar">
+      {/* Кнопки форматирования */}
+      <button onClick={() => applyStyle('bold')} title="Жирный">
+        <strong>Ж</strong>
+      </button>
+      <button onClick={() => applyStyle('italic')} title="Курсив">
+        <em>К</em>
+      </button>
+      <button 
+        onClick={() => applyStyle('underline')} 
+        title="Подчеркивание"
+        className="underline-btn"
+      >
+        <u>Ч</u>
+      </button>
+
+      {/* Выбор шрифта */}
+      <div className="toolbar-dropdown">
+        <button 
+          onClick={() => setShowFonts(!showFonts)}
+          title="Шрифт"
+        >
+          Шрифт ▼
+        </button>
+        {showFonts && (
+          <div className="dropdown-menu">
+            {fonts.map(font => (
+              <button
+                key={font.value}
+                onClick={() => {
+                  applyStyle('font', font.value);
+                  setShowFonts(false);
+                }}
+                style={{ fontFamily: font.value }}
+              >
+                {font.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Выбор размера */}
+      <div className="toolbar-dropdown">
+        <button 
+          onClick={() => setShowSizes(!showSizes)}
+          title="Размер"
+        >
+          Размер ▼
+        </button>
+        {showSizes && (
+          <div className="dropdown-menu">
+            {sizes.map(size => (
+              <button
+                key={size.value}
+                onClick={() => {
+                  applyStyle('size', size.value);
+                  setShowSizes(false);
+                }}
+              >
+                {size.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Editor = ({ value, onChange }) => {
+  const initialConfig = {
+    namespace: 'Editor',
+    theme: {
+      text: {
+        bold: 'text-bold',
+        italic: 'text-italic',
+        underline: 'text-underline',
+        'font-arial': 'font-arial',
+        'font-times': 'font-times',
+        'font-courier': 'font-courier',
+        'font-georgia': 'font-georgia',
+        'font-verdana': 'font-verdana',
+        'size-small': 'size-small',
+        'size-normal': 'size-normal',
+        'size-large': 'size-large',
+        'size-huge': 'size-huge'
+      }
+    },
+    onError(error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <LexicalComposer initialConfig={initialConfig}>
+      <Toolbar />
+      <div className="editor-container">
+        <RichTextPlugin
+          contentEditable={<ContentEditable className="editor-content" />}
+          placeholder={<div className="editor-placeholder"></div>}
+        />
+        <OnChangePlugin onChange={onChange} />
+        <HistoryPlugin />
+      </div>
+    </LexicalComposer>
+  );
+};
+
+// Остальной код компонента Writeart остается без изменений
 
 const Writeart = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [section1, setSection1] = useState("");
-  const [section2, setSection2] = useState("");
+  const [content, setContent] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedAge, setSelectedAge] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+
+  const categories = ["Искусство", "Еда", "Наука", "Видеоигры", "РГПУ", "Тревел"];
+  const ageRestrictions = ["0+", "6+", "12+", "16+", "18+"];
+
+  const handleCategoryClick = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter(c => c !== category));
+    } else {
+      if (selectedCategories.length < 3) {
+        setSelectedCategories([...selectedCategories, category]);
+      }
+    }
+  };
+
+  const handleAgeClick = (age) => {
+    setSelectedAge(selectedAge === age ? null : age);
+  };
+
+  const handleCoverImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCoverImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
-    <div className="container-fluid p-4" style={{ backgroundColor: "#f7f9fc", minHeight: "100vh" }}>
-      {/* Верхняя навигационная панель */}
-      <div className="d-flex justify-content-between align-items-center py-3 border-bottom">
-        {/* Логотип с правым отступом */}
-        <img 
-          src="/logo_black.jpg" 
-          alt="pelikan logo" 
-          className="me-5" // Отступ справа 3rem
-          style={{ 
-            width: '120px',
-            height: 'auto',
-            objectFit: 'contain'
-          }}
-        />
-        
-        {/* Навигационные кнопки с отступами */}
-        <div className="d-flex align-items-center" style={{ gap: '2rem' }}>
-          <button 
-            type="button" 
-            className="btn btn-link p-0"
-            onClick={() => navigate("/main")}
-            style={{ 
-              fontWeight: 500,
-              color: '#003896' // Темно-синий цвет
-            }}
-          >
-            Статьи
-          </button>
-          <button 
-            type="button" 
-            className="btn btn-link p-0"
-            style={{ 
-              fontWeight: 500,
-              color: '#003896' // Темно-синий цвет
-            }}
-          >
-            Авторы
-          </button>
-          <button 
-            type="button" 
-            className="btn btn-link p-0 me-4" // Добавлен правый отступ
-            style={{ 
-              fontWeight: 500,
-              color: '#003896' // Темно-синий цвет
-            }}
-          >
-            Конспекты
-          </button>
+    <div className="write-art-container">
+      {/* Навигация */}
+      <div className="write-art-nav">
+        <img src={`${import.meta.env.BASE_URL}logo_black.jpg`} />
+
+
+                
+        <div className="write-art-nav-links">
+          <button className="nav-link">Статьи</button>
+          <button className="nav-link">Авторы</button>
+          <button className="nav-link">Конспекты</button>
         </div>
         
-        {/* Кнопки авторизации с отступами */}
-        <div className="d-flex align-items-center ms-auto" style={{ gap: '1rem' }}>
-          <button 
-            type="button" 
-            className="btn btn-outline-primary px-4 py-1"
-            onClick={() => navigate("/profile")}
-            style={{ 
-              borderRadius: '20px',
-              borderColor: '#003896', // Темно-синяя обводка
-              color: '#003896' // Темно-синий текст
-            }}
-          >
-            Профиль
-          </button>
-          <button 
-            type="button" 
-            className="btn btn-primary px-4 py-1"
-            onClick={() => navigate("/main")}
-            style={{ 
-              borderRadius: '20px',
-              backgroundColor: '#003896', // Темно-синий фон
-              color: 'white', // Белый текст
-              border: 'none'
-            }}
-          >
-            Выйти
-          </button>
+        <div className="write-art-auth">
+          <button className="auth-link" onClick={() => navigate("/main")}>Выйти</button>
         </div>
       </div>
 
-      <div className="row">
-        {/* Левая колонка */}
-        <div className="col-md-3 text-center mb-4">
-          <img src="/avatar.jpg" alt="Аватар" className="img-fluid rounded-circle mb-2" style={{ maxWidth: "150px" }} />
-          <h5>Елена Иглина</h5>
-          <div className="my-3">
-            <p style={{ fontWeight: "bold" }}>Выберите до 3 вариантов</p>
-            <button className="btn btn-outline-primary btn-sm m-1">Искусство</button>
-            <button className="btn btn-outline-primary btn-sm m-1">Наука</button>
-            <button className="btn btn-outline-primary btn-sm m-1">РГПУ</button>
-          </div>
-          <p style={{ fontWeight: "bold" }}>Выберите ограничение по возрасту</p>
-          <div className="d-flex flex-wrap justify-content-center">
-            {["0+", "6+", "12+", "16+", "18+"].map((age, i) => (
-              <button key={i} className="btn btn-outline-primary btn-sm m-1">{age}</button>
-            ))}
-          </div>
-        </div>
+      {/* Обложка статьи */}
+      <div className="article-cover" style={{ backgroundImage: coverImage ? `url(${coverImage})` : 'linear-gradient(to right, #1a73e8, #0d47a1)' }}>
+        <input
+          type="file"
+          id="cover-upload"
+          accept="image/*"
+          onChange={handleCoverImageChange}
+          style={{ display: 'none' }}
+        />
+        <label htmlFor="cover-upload" className="cover-upload-label">
+          {coverImage ? 'Изменить обложку' : 'Добавить обложку'}
+        </label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Введите заголовок статьи"
+          className="cover-title-input"
+        />
+      </div>
 
-        {/* Центральная часть */}
-        <div className="col-md-9">
-          <div className="p-3 mb-3" style={{ background: "linear-gradient(to right, #2c3e50, #3498db)", borderRadius: "10px", color: "#fff" }}>
-            <h3>Заголовок</h3>
-            <input
-              type="text"
-              className="form-control form-control-lg mt-2"
-              placeholder="Введите заголовок статьи"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+      {/* Основное содержимое */}
+      <div className="write-art-content-wrapper">
+        {/* Левая колонка */}
+        <div className="write-art-sidebar">
+          <div className="avatar-wrapper">
+            <img 
+              src={`${import.meta.env.BASE_URL}avatar.jpg`} 
+              alt="Avatar" 
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.style.display = 'none';
+              }}
             />
           </div>
 
-          <div className="mb-3">
-            <h5>Пересказ статьи за 1 минуту</h5>
-            <textarea
-              className="form-control"
-              rows="3"
-              placeholder="Напишите краткий пересказ..."
-              value={summary}
-              onChange={(e) => setSummary(e.target.value)}
-            ></textarea>
+
+          
+          <h3 className="user-name">Черепанова Мария</h3>
+          
+          <div className="write-art-categories">
+            <p className="section-title">Выберите до 3 вариантов</p>
+            <div className="categories-container">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  className={`category-btn ${selectedCategories.includes(category) ? 'selected' : ''}`}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          <div className="write-art-age">
+            <p className="section-title">Выберите ограничение по возрасту</p>
+            <div className="age-container">
+              {ageRestrictions.map(age => (
+                <button
+                  key={age}
+                  className={`age-btn ${selectedAge === age ? 'selected' : ''}`}
+                  onClick={() => handleAgeClick(age)}
+                >
+                  {age}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Правая колонка */}
+        <div className="write-art-main">
+          <div className="write-art-section">
+            <h5 className="section-title">Пересказ статьи за 1 минуту</h5>
+            <Editor value={content} onChange={setContent} />
           </div>
 
-          <div className="mb-3">
-            <h5>Историческая справка</h5>
-            <textarea
-              className="form-control"
-              rows="3"
-              placeholder="Добавьте текст..."
-              value={section1}
-              onChange={(e) => setSection1(e.target.value)}
-            ></textarea>
+          <div className="write-art-section">
+            <h5 className="section-title">Ваша статья</h5>
+            <Editor value={content} onChange={setContent} />
           </div>
 
-          <div className="mb-4">
-            <h5>Раздел 2</h5>
-            <textarea
-              className="form-control"
-              rows="3"
-              placeholder="Добавьте текст..."
-              value={section2}
-              onChange={(e) => setSection2(e.target.value)}
-            ></textarea>
-          </div>
-
-          <button className="btn btn-primary w-100 py-2" onClick={() => navigate("/mainreg")}>Опубликовать</button>
+          <button 
+            className="write-art-publish"
+            onClick={() => navigate("/mainreg")}
+          >
+            Опубликовать
+          </button>
         </div>
       </div>
     </div>

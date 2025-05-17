@@ -1,0 +1,521 @@
+/* Основные стили */
+.write-art-container {
+  min-height: 100vh;
+  background-color: #f7f9fc;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.write-art-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  position: relative;
+  z-index: 10;
+}
+
+.write-art-logo {
+  height: 40px;
+  width: auto;
+}
+
+.write-art-nav-links, .write-art-auth {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link, .auth-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  padding: 5px 10px;
+}
+
+.nav-link:hover, .auth-link:hover {
+  color: #1a73e8;
+}
+
+/* Обложка статьи */
+.article-cover {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cover-title-input {
+  color: #000000; /* Черный цвет текста */
+  background: rgba(255, 255, 255, 0.9); /* Белый фон с небольшой прозрачностью */
+  border: none;
+  border-radius: 4px;
+  padding: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Для плейсхолдера (подсказки) */
+.cover-title-input::placeholder {
+  color: #666; /* Серый цвет для подсказки */
+  opacity: 1; /* Полная видимость */
+}
+
+.cover-upload-label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.cover-upload-label:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Основное содержимое */
+.write-art-content-wrapper {
+  display: flex;
+  padding: 0 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.write-art-sidebar {
+  width: 250px;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 2rem;
+  flex-shrink: 0;
+}
+
+.write-art-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  display: block;
+  border: 3px solid #1a73e8;
+}
+
+.user-name {
+  margin-bottom: 2rem;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: left;
+  color: #333;
+}
+
+.categories-container, .age-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.category-btn, .age-btn {
+  padding: 6px 12px;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  color: #333;
+}
+
+.category-btn.selected, .age-btn.selected {
+  background-color: #1a73e8;
+  color: white;
+  border-color: #1a73e8;
+}
+
+.write-art-main {
+  flex-grow: 1;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили редактора */
+.editor-toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+}
+
+.editor-toolbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.editor-container {
+  border: 1px solid #dee2e6;
+  border-radius: 0 0 4px 4px;
+  margin-bottom: 2rem;
+}
+
+.editor-content {
+  min-height: 200px;
+  padding: 1rem;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+}
+
+.editor-placeholder {
+  color: #999;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  pointer-events: none;
+}
+
+.section-content {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.write-art-publish {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: block;
+  margin-left: auto;
+}
+
+.write-art-publish:hover {
+  background-color: #1557b0;
+}
+
+/* Адаптация */
+@media (max-width: 768px) {
+  .write-art-content-wrapper {
+    flex-direction: column;
+    padding: 0 1rem 1rem;
+  }
+  
+  .write-art-sidebar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .article-cover {
+    height: 200px;
+    padding: 1rem;
+  }
+  
+  .cover-title-input {
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+
+/* Стили для случаев, когда изображения не загружаются */
+.write-art-logo {
+  background-color: #1a73e8;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.write-art-avatar {
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 24px;
+}
+
+.avatar-wrapper {
+  width: 180px;               /* ширина контейнера */
+  height: 240px;              /* высота контейнера */
+  border-radius: 20px;        /* закруглённые края */
+  overflow: hidden;           /* обрезка изображения по рамке */
+  border: 3px solid #1a73e8;  /* рамка вокруг */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* тень */
+  margin: 0 auto 1rem;        /* по центру и отступ снизу */
+  background-color: #f2f2f2;  /* фон на случай, если картинка не загрузится */
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* заполняет прямоугольник, обрезая по краям */
+}
+
+.editor-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 200px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.editor-input {
+  outline: none;
+  min-height: 150px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.editor-placeholder {
+  color: #999;
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 6px 10px;
+}
+
+select, input[type="color"] {
+  padding: 6px;
+}
+
+/* Шрифты */
+.font-Arial {
+  font-family: Arial, sans-serif;
+}
+.font-Georgia {
+  font-family: Georgia, serif;
+}
+.font-Courier {
+  font-family: "Courier New", monospace;
+}
+.font-Montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Основной контейнер */
+.write-art-container {
+  max-width: 1600px; /* Фиксируем максимальную ширину всей страницы */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Контейнер с двумя колонками */
+.write-art-content-wrapper {
+  display: flex;
+  max-width: 1400px; /* Фиксированная ширина */
+  margin: 0 auto; /* Центрирование */
+  gap: 40px; /* Расстояние между колонками */
+}
+
+/* Левая колонка (фиксированная ширина) */
+.write-art-sidebar {
+  width: 350px; /* Жестко заданная ширина */
+  flex-shrink: 0; /* Запрещаем сжиматься */
+}
+
+/* Правая колонка (основной контент) */
+.write-art-main {
+  width: 700px; /* Фиксированная ширина контента */
+  flex-grow: 0; /* Запрещаем растягиваться */
+  flex-shrink: 0; /* Запрещаем сжиматься */
+}
+
+/* Блоки с текстом внутри правой колонки */
+.editor-container, 
+.section-content {
+  max-width: 800px; /* Совпадает с шириной колонки */
+  width: 100%;
+}
+
+/* Стили для панели инструментов */
+.editor-toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.editor-toolbar button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Выпадающие меню */
+.toolbar-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+/* Стили для текста */
+.text-bold { font-weight: bold; }
+.text-italic { font-style: italic; }
+.text-underline { text-decoration: underline; }
+
+/* Стили шрифтов */
+.font-arial { font-family: Arial, sans-serif; }
+.font-times { font-family: 'Times New Roman', serif; }
+.font-courier { font-family: 'Courier New', monospace; }
+.font-georgia { font-family: Georgia, serif; }
+.font-verdana { font-family: Verdana, sans-serif; }
+
+/* Стили размеров */
+.size-small { font-size: 12px; }
+.size-normal { font-size: 16px; }
+.size-large { font-size: 20px; }
+.size-huge { font-size: 24px; }
+
+/* Исправление кнопки подчеркивания */
+.underline-btn {
+  text-decoration: underline;
+}
+
+.editor-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 300px;
+  margin-top: 10px;
+  background: white;
+}
+
+.editor-input {
+  min-height: 200px;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.editor-placeholder {
+  color: #999;
+  padding: 10px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  background: #f8f8f8;
+}
+
+/* Улучшенные стили для редактора */
+.editor-content {
+  min-height: 200px;
+  padding: 1rem;
+  line-height: 1.6;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Стили для выпадающих меню */
+.dropdown-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f5f5f5;
+}
+
+.editor-toolbar select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-left: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+.font-arial { font-family: Arial, sans-serif; }
+.font-times { font-family: 'Times New Roman', serif; }
+.font-courier { font-family: 'Courier New', monospace; }
+.font-georgia { font-family: Georgia, serif; }
+.font-verdana { font-family: Verdana, sans-serif; }
+
+.size-small { font-size: 12px; }
+.size-normal { font-size: 16px; }
+.size-large { font-size: 20px; }
+.size-huge { font-size: 24px; }

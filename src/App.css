@@ -58,3 +58,28 @@
 }
 
 
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 576px) {
+  .auth-form-container {
+    padding: 1.5rem;
+  }
+}
+

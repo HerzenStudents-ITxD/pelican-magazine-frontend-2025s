@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Sign_in_page = () => {
+const Sign_in = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    try {
+      // Здесь будет запрос к API для входа
+      // const response = await login({ email, password });
+      
+      // Имитация ответа с требованием 2FA
+      navigate('/twofa-verify', { state: { email } });
+    } catch (err) {
+      setError('Неверный email или пароль');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="container-fluid vh-20 p-0">
       <div className="row g-0 h-100">
-
         {/* Левая часть с фото */}
         <div className="col-md-6 d-none d-md-block p-0">
           <img 
@@ -37,12 +57,17 @@ const Sign_in_page = () => {
               Вход в профиль
             </h2>
 
-            <form>
+            {error && <div className="alert alert-danger">{error}</div>}
+
+            <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input 
                   type="email" 
                   className="form-control form-control-lg" 
                   placeholder="Email или номер телефона" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -50,6 +75,9 @@ const Sign_in_page = () => {
                   type="password" 
                   className="form-control form-control-lg" 
                   placeholder="Пароль" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
               <div className="mb-4 text-end">
@@ -63,12 +91,12 @@ const Sign_in_page = () => {
                 </button>
               </div>
               <button 
-                type="button" 
+                type="submit" 
                 className="btn btn-primary w-100 py-2 mb-3"
-                onClick={() => navigate("/mainreg")}
+                disabled={isLoading}
                 style={{ fontSize: "0.9rem", backgroundColor: "#003896" }}
               >
-                Войти в профиль
+                {isLoading ? 'Вход...' : 'Войти в профиль'}
               </button>
               <div className="text-center">
                 <button 
@@ -81,7 +109,6 @@ const Sign_in_page = () => {
                 </button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
@@ -89,4 +116,4 @@ const Sign_in_page = () => {
   );
 };
 
-export default Sign_in_page;
+export default Sign_in;
