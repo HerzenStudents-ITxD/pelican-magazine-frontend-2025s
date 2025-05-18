@@ -4,9 +4,8 @@ import Card from "react-bootstrap/Card";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const Article_preview = ({ title, author, image, isLiked: initialIsLiked = false, isGuest = false }) => {
+const Article_preview = ({ title, author, image, isLiked, onLikeToggle, isGuest = false }) => {
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(initialIsLiked);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleLikeClick = (e) => {
@@ -15,7 +14,7 @@ const Article_preview = ({ title, author, image, isLiked: initialIsLiked = false
     if (isGuest) {
       setShowLoginModal(true);
     } else {
-      setIsLiked(!isLiked);
+      onLikeToggle?.();
     }
   };
 

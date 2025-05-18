@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Article_preview from '../components/article_prev';
@@ -9,18 +9,25 @@ import { FaSearch } from 'react-icons/fa';
 const Liked_arts = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
-  
-  const allLikedArticles = [
-    { id: 1, title: "Яблоки: польза и вред для здоровья", author: "Автор Авторович", image: "apples.jpg" },
-    { id: 3, title: "Лимоны в народной медицине", author: "Павел Костин", image: "lemons.jpg" },
-    { id: 5, title: "Груши: сорта и их особенности", author: "Фруктовый Эксперт", image: "pears.jpg" },
-    { id: 7, title: "Киви: витаминная бомба", author: "ЗОЖ Блогер", image: "kiwis.jpg" }
-  ];
+  const [likedArticles, setLikedArticles] = useState([]);
 
-  // Фильтрация избранных статей по поисковому запросу
-  const filteredArticles = allLikedArticles.filter(article =>
+  // Загрузка избранных статей из localStorage при монтировании
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem('likedArticles')) || [];
+    setLikedArticles(savedLikes);
+  }, []);
+
+  // Фильтрация по поисковому запросу
+  const filteredArticles = likedArticles.filter(article =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Обработчик снятия лайка
+  const handleUnlike = (articleId) => {
+    const updatedLikes = likedArticles.filter(article => article.id !== articleId);
+    setLikedArticles(updatedLikes);
+    localStorage.setItem('likedArticles', JSON.stringify(updatedLikes));
+  };
 
   return (
     <div className="container-fluid px-4" style={{ backgroundColor: '#f7f9fc', minHeight: '100vh' }}>
@@ -89,7 +96,8 @@ const Liked_arts = () => {
             backgroundColor: 'white',
             borderRadius: '8px',
             padding: '20px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+            boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+            minHeight: '400px'
           }}>
             <div className="d-flex align-items-center mb-4" style={{ gap: '15px' }}>
               <button 
@@ -107,7 +115,7 @@ const Liked_arts = () => {
               }}>Избранное</h3>
             </div>
 
-            <div className="row" style={{ margin: '-8px' }}>
+            <div className="row" style={{ margin: '-8px', minHeight: '300px' }}>
               {filteredArticles.length > 0 ? (
                 filteredArticles.map((article) => (
                   <div key={article.id} className="col-md-6" style={{ padding: '8px' }}>
@@ -116,12 +124,13 @@ const Liked_arts = () => {
                       author={article.author}
                       image={article.image}
                       isLiked={true}
+                      onLikeToggle={() => handleUnlike(article.id)}
                     />
                   </div>
                 ))
               ) : (
-                <div className="col-12 text-center py-4">
-                  <p style={{ color: '#666' }}>Статьи не найдены</p>
+                <div className="col-12 text-center py-4" style={{ minHeight: '200px' }}>
+                  <p style={{ color: '#666' }}>Нет избранных статей</p>
                 </div>
               )}
             </div>

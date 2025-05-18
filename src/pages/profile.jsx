@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Article_preview from '../components/article_prev';
@@ -7,17 +7,18 @@ import Top_users from '../components/top_users';
 
 const Profile = () => {
   const navigate = useNavigate();
-  
-  const userArticles = [
-    { id: 1, title: "Моя статья 1", author: "Вы", image: "apples.jpg" },
-    { id: 2, title: "Моя статья 2", author: "Вы", image: "bananas.jpg" },
-    { id: 3, title: "Моя статья 3", author: "Вы", image: "lemons.jpg" },
-    { id: 4, title: "Моя статья 4", author: "Вы", image: "oranges.jpg" },
-    { id: 5, title: "Моя статья 5", author: "Вы", image: "pears.jpg" },
-    { id: 6, title: "Моя статья 6", author: "Вы", image: "pineapples.jpg" },
-    { id: 7, title: "Моя статья 7", author: "Вы", image: "kiwis.jpg" },
-    { id: 8, title: "Моя статья 8", author: "Вы", image: "grapes.jpg" }
-  ];
+  const [likedArticles, setLikedArticles] = useState([]);
+
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem('likedArticles')) || [];
+    setLikedArticles(savedLikes);
+  }, []);
+
+  const handleUnlike = (articleId) => {
+    const updatedLikes = likedArticles.filter(article => article.id !== articleId);
+    setLikedArticles(updatedLikes);
+    localStorage.setItem('likedArticles', JSON.stringify(updatedLikes));
+  };
 
   return (
     <div className="container-fluid px-4" style={{ backgroundColor: 'white' }}>
@@ -70,15 +71,23 @@ const Profile = () => {
           </div>
 
           <div className="row" style={{ margin: '-8px' }}>
-            {userArticles.map((article) => (
-              <div key={article.id} className="col-md-6" style={{ padding: '8px' }}>
-                <Article_preview 
-                  title={article.title}
-                  author={article.author}
-                  image={article.image}
-                />
+            {likedArticles.length > 0 ? (
+              likedArticles.map((article) => (
+                <div key={article.id} className="col-md-6" style={{ padding: '8px' }}>
+                  <Article_preview 
+                    title={article.title}
+                    author={article.author}
+                    image={article.image}
+                    isLiked={true}
+                    onLikeToggle={() => handleUnlike(article.id)}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="col-12 text-center py-4">
+                <p style={{ color: '#666' }}>Нет избранных статей</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import Article_preview from '../components/article_prev';
@@ -9,8 +9,14 @@ const Homereg = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTopics, setSelectedTopics] = useState([]);
+  const [likedArticles, setLikedArticles] = useState([]);
   
   const topics = ['искусство', 'наука', 'ргпу', 'история', 'литература', 'технологии'];
+
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem('likedArticles')) || [];
+    setLikedArticles(savedLikes);
+  }, []);
 
   const toggleTopic = (topic) => {
     if (selectedTopics.includes(topic)) {
@@ -34,6 +40,20 @@ const Homereg = () => {
     { id: 11, title: "Персики и их полезные свойства", author: "Фруктовый Гурман", image: "peaches.jpg", topics: ["наука", "ргпу"] },
     { id: 12, title: "Арбузы: как отличить спелый от незрелого", author: "Летний Обозреватель", image: "watermelons.jpg", topics: ["технологии", "история"] }
   ];
+
+  const handleLikeToggle = (article) => {
+    const isLiked = likedArticles.some(a => a.id === article.id);
+    let updatedLikes;
+
+    if (isLiked) {
+      updatedLikes = likedArticles.filter(a => a.id !== article.id);
+    } else {
+      updatedLikes = [...likedArticles, article];
+    }
+
+    setLikedArticles(updatedLikes);
+    localStorage.setItem('likedArticles', JSON.stringify(updatedLikes));
+  };
 
   const filteredArticles = allArticles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -138,7 +158,7 @@ const Homereg = () => {
                     alt="Избранное" 
                     style={{ width: '16px', height: '16px' }} 
                   />
-                  Избранное
+                  Избранное ({likedArticles.length})
                 </button>
               </div>
 
@@ -150,6 +170,8 @@ const Homereg = () => {
                         title={article.title}
                         author={article.author}
                         image={article.image}
+                        isLiked={likedArticles.some(a => a.id === article.id)}
+                        onLikeToggle={() => handleLikeToggle(article)}
                       />
                     </div>
                   ))
