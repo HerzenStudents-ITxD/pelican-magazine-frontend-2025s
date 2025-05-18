@@ -4,7 +4,7 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from './pages/home_guest';
 import Homereg from './pages/home_user';
-import SignIn from './pages/sign_in'; // Переименовано для единообразия
+import SignIn from './pages/sign_in'; 
 import Registration from './pages/registration';
 import Forgot_password from './pages/forgot_password';
 import New_password from './pages/new_password';
@@ -34,8 +34,6 @@ function App() {
         <Route path="/writeart" element={<Writeart />} />
         <Route path="/readart" element={<Readart />} />
         <Route path="/likedarts" element={<Liked_arts />} />
-        
-        {/* Новые маршруты */}
         <Route path="/email-confirmation" element={<EmailConfirmation />} />
         <Route path="/twofa-verify" element={<TwoFAPage />} />
       </Routes>

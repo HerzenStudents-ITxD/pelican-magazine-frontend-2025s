@@ -29,29 +29,20 @@ const Homereg = () => {
       <div className="row mt-4">
         {/* Левая колонка с поиском и темами */}
         <div className="col-md-3">
-          {/* Поисковая строка с кнопкой сердца */}
-          <div className="d-flex align-items-center mb-4">
-            <div className="input-group" style={{ borderRadius: '50px', overflow: 'hidden', flex: 1 }}>
-              <span className="input-group-text bg-white border-end-0">
-                <FaSearch />
+          {/* Поисковая строка */}
+          <div className="search-container mb-4">
+            <div className="input-group" style={{ borderRadius: '25px', border: '1px solid #e0e0e0' }}>
+              <span className="input-group-text bg-white border-0">
+                <FaSearch className="text-muted" />
               </span>
               <input
                 type="text"
-                className="form-control border-start-0"
+                className="form-control border-0"
                 placeholder="Найти статью"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                style={{ borderLeft: 'none' }}
               />
             </div>
-            <button 
-              type="button" 
-              className="btn btn-link p-0 ms-2"
-              onClick={() => navigate("/likedarts")}
-              style={{ padding: '5px' }}
-            >
-              <img src="/pelican-magazine/hearth.jpg" alt="Избранное" style={{ width: '24px', height: '24px' }} />
-            </button>
           </div>
 
           {/* Список тем */}
@@ -74,6 +65,22 @@ const Homereg = () => {
 
         {/* Правая колонка с превью статей */}
         <div className="col-md-9">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h4>Статьи</h4>
+            <button 
+              type="button" 
+              className="btn btn-outline-primary"
+              onClick={() => navigate("/likedarts")}
+              style={{ borderRadius: '20px' }}
+            >
+              <img 
+                src="/pelican-magazine/hearth.jpg" 
+                alt="Избранное" 
+                style={{ width: '16px', height: '16px', marginRight: '8px' }} 
+              />
+              Избранное
+            </button>
+          </div>
           <Article_preview />
         </div>
       </div>

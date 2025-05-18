@@ -30,18 +30,19 @@ const Home = () => {
         {/* Левая колонка с поиском и темами */}
         <div className="col-md-3">
           {/* Поисковая строка */}
-          <div className="input-group mb-4" style={{ borderRadius: '50px', overflow: 'hidden' }}>
-            <span className="input-group-text bg-white border-end-0">
-              <FaSearch />
-            </span>
-            <input
-              type="text"
-              className="form-control border-start-0"
-              placeholder="Найти статью"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ borderLeft: 'none' }}
-            />
+          <div className="search-container mb-4">
+            <div className="input-group" style={{ borderRadius: '25px', border: '1px solid #e0e0e0' }}>
+              <span className="input-group-text bg-white border-0">
+                <FaSearch className="text-muted" />
+              </span>
+              <input
+                type="text"
+                className="form-control border-0"
+                placeholder="Найти статью"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
           </div>
 
           {/* Список тем */}
@@ -64,6 +65,7 @@ const Home = () => {
 
         {/* Правая колонка с превью статей */}
         <div className="col-md-9">
+          <h4 className="mb-3">Статьи</h4>
           <Article_preview />
         </div>
       </div>
