@@ -5,22 +5,30 @@ import Article_preview from '../components/article_prev';
 import Avatar from '../components/avatar';
 import Top_users from '../components/top_users';
 
-
 const Profile = () => {
   const navigate = useNavigate();
   
+  const userArticles = [
+    { id: 1, title: "Моя статья 1", author: "Вы", image: "apples.jpg" },
+    { id: 2, title: "Моя статья 2", author: "Вы", image: "bananas.jpg" },
+    { id: 3, title: "Моя статья 3", author: "Вы", image: "lemons.jpg" },
+    { id: 4, title: "Моя статья 4", author: "Вы", image: "oranges.jpg" },
+    { id: 5, title: "Моя статья 5", author: "Вы", image: "pears.jpg" },
+    { id: 6, title: "Моя статья 6", author: "Вы", image: "pineapples.jpg" },
+    { id: 7, title: "Моя статья 7", author: "Вы", image: "kiwis.jpg" },
+    { id: 8, title: "Моя статья 8", author: "Вы", image: "grapes.jpg" }
+  ];
+
   return (
     <div className="container-fluid px-4" style={{ backgroundColor: 'white' }}>
       <div className="mt-4">
         <Top_users />
       </div>
 
-      {/* Основное содержимое профиля */}
       <div className="row mt-4">
-        {/* Левая колонка с аватаром */}
         <div className="col-md-4">
           <div style={{ 
-            backgroundColor: '#e6f0ff', // Синеватый фон
+            backgroundColor: '#e6f0ff',
             borderRadius: '15px',
             padding: '20px',
             textAlign: 'center'
@@ -38,14 +46,10 @@ const Profile = () => {
             }}>
               Мур Мур Мур Мур Я Еще Не Отчислилась Ураааааааааааааа
             </p>
-            
-            
           </div>
         </div>
 
-        {/* Правая колонка с контентом */}
         <div className="col-md-8">
-          {/* Панель действий */}
           <div className="d-flex align-items-center mb-4" style={{ gap: '15px' }}>
             <button 
               type="button" 
@@ -65,10 +69,16 @@ const Profile = () => {
             </button>
           </div>
 
-          {/* Превью статьи (одна статья) */}
-          <div className="mb-4">
-            <Article_preview />
-            
+          <div className="row" style={{ margin: '-8px' }}>
+            {userArticles.map((article) => (
+              <div key={article.id} className="col-md-6" style={{ padding: '8px' }}>
+                <Article_preview 
+                  title={article.title}
+                  author={article.author}
+                  image={article.image}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

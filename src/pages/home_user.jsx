@@ -10,7 +10,7 @@ const Homereg = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTopics, setSelectedTopics] = useState([]);
   
-  const topics = ['Искусство', 'Наука', 'РГПУ', 'История', 'Литература', 'Технологии'];
+  const topics = ['искусство', 'наука', 'ргпу', 'история', 'литература', 'технологии'];
 
   const toggleTopic = (topic) => {
     if (selectedTopics.includes(topic)) {
@@ -21,23 +21,26 @@ const Homereg = () => {
   };
 
   const allArticles = [
-    { id: 1, title: "Яблоки: польза и вред для здоровья", author: "Автор Авторович", image: "apples.jpg" },
-    { id: 2, title: "Бананы в кулинарии: неожиданные рецепты", author: "Любитель Статей", image: "bananas.jpg" },
-    { id: 3, title: "Лимоны в народной медицине", author: "Павел Костин", image: "lemons.jpg" },
-    { id: 4, title: "История апельсинов в Европе", author: "Писательница Статейская", image: "oranges.jpg" },
-    { id: 5, title: "Груши: сорта и их особенности", author: "Фруктовый Эксперт", image: "pears.jpg" },
-    { id: 6, title: "Ананасы и их выращивание", author: "Тропический Садовод", image: "pineapples.jpg" },
-    { id: 7, title: "Киви: витаминная бомба", author: "ЗОЖ Блогер", image: "kiwis.jpg" },
-    { id: 8, title: "Виноград: от выращивания до виноделия", author: "Винный Консультант", image: "grapes.jpg" },
-    { id: 9, title: "Клубника: лучшие сорта для вашего сада", author: "Садовод Профи", image: "strawberries.jpg" },
-    { id: 10, title: "Манго: как выбрать и правильно есть", author: "Экзотик Фуд", image: "mangoes.jpg" },
-    { id: 11, title: "Персики и их полезные свойства", author: "Фруктовый Гурман", image: "peaches.jpg" },
-    { id: 12, title: "Арбузы: как отличить спелый от незрелого", author: "Летний Обозреватель", image: "watermelons.jpg" }
+    { id: 1, title: "Яблоки: польза и вред для здоровья", author: "Автор Авторович", image: "apples.jpg", topics: ["наука", "ргпу"] },
+    { id: 2, title: "Бананы в кулинарии: неожиданные рецепты", author: "Любитель Статей", image: "bananas.jpg", topics: ["литература", "искусство"] },
+    { id: 3, title: "Лимоны в народной медицине", author: "Павел Костин", image: "lemons.jpg", topics: ["наука", "история"] },
+    { id: 4, title: "История апельсинов в Европе", author: "Писательница Статейская", image: "oranges.jpg", topics: ["история", "литература"] },
+    { id: 5, title: "Груши: сорта и их особенности", author: "Фруктовый Эксперт", image: "pears.jpg", topics: ["наука", "технологии"] },
+    { id: 6, title: "Ананасы и их выращивание", author: "Тропический Садовод", image: "pineapples.jpg", topics: ["технологии", "ргпу"] },
+    { id: 7, title: "Киви: витаминная бомба", author: "ЗОЖ Блогер", image: "kiwis.jpg", topics: ["наука", "ргпу"] },
+    { id: 8, title: "Виноград: от выращивания до виноделия", author: "Винный Консультант", image: "grapes.jpg", topics: ["искусство", "история"] },
+    { id: 9, title: "Клубника: лучшие сорта для вашего сада", author: "Садовод Профи", image: "strawberries.jpg", topics: ["технологии", "наука"] },
+    { id: 10, title: "Манго: как выбрать и правильно есть", author: "Экзотик Фуд", image: "mangoes.jpg", topics: ["литература", "искусство"] },
+    { id: 11, title: "Персики и их полезные свойства", author: "Фруктовый Гурман", image: "peaches.jpg", topics: ["наука", "ргпу"] },
+    { id: 12, title: "Арбузы: как отличить спелый от незрелого", author: "Летний Обозреватель", image: "watermelons.jpg", topics: ["технологии", "история"] }
   ];
 
-  const filteredArticles = allArticles.filter(article =>
-    article.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredArticles = allArticles.filter(article => {
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesTopics = selectedTopics.length === 0 || 
+      article.topics.some(topic => selectedTopics.includes(topic));
+    return matchesSearch && matchesTopics;
+  });
 
   return (
     <div style={{ backgroundColor: '#f7f9fc', minHeight: '100vh' }}>
@@ -107,7 +110,8 @@ const Homereg = () => {
               backgroundColor: 'white',
               borderRadius: '8px',
               padding: '20px',
-              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+              boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+              minHeight: '400px'
             }}>
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h4 style={{ 
@@ -138,7 +142,7 @@ const Homereg = () => {
                 </button>
               </div>
 
-              <div className="row" style={{ margin: '-8px' }}>
+              <div className="row" style={{ margin: '-8px', minHeight: '300px' }}>
                 {filteredArticles.length > 0 ? (
                   filteredArticles.map((article) => (
                     <div key={article.id} className="col-md-4" style={{ padding: '8px' }}>
@@ -150,7 +154,7 @@ const Homereg = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="col-12 text-center py-4">
+                  <div className="col-12 text-center py-4" style={{ minHeight: '200px' }}>
                     <p style={{ color: '#666' }}>Статьи не найдены</p>
                   </div>
                 )}
