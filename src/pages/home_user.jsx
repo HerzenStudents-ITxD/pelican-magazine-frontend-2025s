@@ -20,68 +20,144 @@ const Homereg = () => {
     }
   };
 
+  const allArticles = [
+    { id: 1, title: "Яблоки: польза и вред для здоровья", author: "Автор Авторович", image: "apples.jpg" },
+    { id: 2, title: "Бананы в кулинарии: неожиданные рецепты", author: "Любитель Статей", image: "bananas.jpg" },
+    { id: 3, title: "Лимоны в народной медицине", author: "Павел Костин", image: "lemons.jpg" },
+    { id: 4, title: "История апельсинов в Европе", author: "Писательница Статейская", image: "oranges.jpg" },
+    { id: 5, title: "Груши: сорта и их особенности", author: "Фруктовый Эксперт", image: "pears.jpg" },
+    { id: 6, title: "Ананасы и их выращивание", author: "Тропический Садовод", image: "pineapples.jpg" },
+    { id: 7, title: "Киви: витаминная бомба", author: "ЗОЖ Блогер", image: "kiwis.jpg" },
+    { id: 8, title: "Виноград: от выращивания до виноделия", author: "Винный Консультант", image: "grapes.jpg" },
+    { id: 9, title: "Клубника: лучшие сорта для вашего сада", author: "Садовод Профи", image: "strawberries.jpg" },
+    { id: 10, title: "Манго: как выбрать и правильно есть", author: "Экзотик Фуд", image: "mangoes.jpg" },
+    { id: 11, title: "Персики и их полезные свойства", author: "Фруктовый Гурман", image: "peaches.jpg" },
+    { id: 12, title: "Арбузы: как отличить спелый от незрелого", author: "Летний Обозреватель", image: "watermelons.jpg" }
+  ];
+
+  // Фильтрация статей по поисковому запросу
+  const filteredArticles = allArticles.filter(article =>
+    article.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div>
+    <div style={{ backgroundColor: '#f7f9fc', minHeight: '100vh' }}>
       <div className="mt-4">
         <Top_users />
       </div>
 
-      <div className="row mt-4">
-        {/* Левая колонка с поиском и темами */}
-        <div className="col-md-3">
-          {/* Поисковая строка */}
-          <div className="search-container mb-4">
-            <div className="input-group" style={{ borderRadius: '25px', border: '1px solid #e0e0e0' }}>
-              <span className="input-group-text bg-white border-0">
-                <FaSearch className="text-muted" />
-              </span>
-              <input
-                type="text"
-                className="form-control border-0"
-                placeholder="Найти статью"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+      <div className="container-fluid" style={{ padding: '0 20px' }}>
+        <div className="row mt-4">
+          <div className="col-md-3">
+            <div style={{ 
+              backgroundColor: 'white', 
+              borderRadius: '8px',
+              padding: '16px',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+              marginBottom: '20px'
+            }}>
+              <div className="mb-4">
+                <div className="input-group" style={{ 
+                  borderRadius: '25px', 
+                  border: '1px solid #dee2e6',
+                  overflow: 'hidden'
+                }}>
+                  <span className="input-group-text bg-white border-end-0">
+                    <FaSearch style={{ color: '#6c757d' }} />
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control border-start-0"
+                    placeholder="Найти статью"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    style={{ borderLeft: 'none' }}
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <h5 style={{ 
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: '#333'
+                }}>Темы</h5>
+                <div className="d-flex flex-wrap gap-2">
+                  {topics.map((topic, index) => (
+                    <button
+                      key={index}
+                      className={`btn btn-sm ${selectedTopics.includes(topic) ? 'btn-primary' : 'btn-outline-primary'}`}
+                      style={{ 
+                        borderRadius: '20px',
+                        fontSize: '12px',
+                        padding: '4px 12px'
+                      }}
+                      onClick={() => toggleTopic(topic)}
+                    >
+                      {topic}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Список тем */}
-          <div className="mb-4">
-            <h5>Темы</h5>
-            <div className="d-flex flex-wrap gap-2">
-              {topics.map((topic, index) => (
-                <button
-                  key={index}
-                  className={`btn btn-sm ${selectedTopics.includes(topic) ? 'btn-primary' : 'btn-outline-primary'}`}
-                  style={{ borderRadius: '50px' }}
-                  onClick={() => toggleTopic(topic)}
+          <div className="col-md-9">
+            <div style={{ 
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              padding: '20px',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+            }}>
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <h4 style={{ 
+                  fontSize: '20px',
+                  fontWeight: '600',
+                  color: '#333',
+                  margin: 0
+                }}>Статьи</h4>
+                <button 
+                  type="button" 
+                  className="btn btn-outline-primary"
+                  onClick={() => navigate("/likedarts")}
+                  style={{ 
+                    borderRadius: '20px',
+                    fontSize: '14px',
+                    padding: '6px 12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}
                 >
-                  {topic}
+                  <img 
+                    src="/pelican-magazine/hearth.jpg" 
+                    alt="Избранное" 
+                    style={{ width: '16px', height: '16px' }} 
+                  />
+                  Избранное
                 </button>
-              ))}
+              </div>
+
+              <div className="row" style={{ margin: '-8px' }}>
+                {filteredArticles.length > 0 ? (
+                  filteredArticles.map((article) => (
+                    <div key={article.id} className="col-md-4" style={{ padding: '8px' }}>
+                      <Article_preview 
+                        title={article.title}
+                        author={article.author}
+                        image={article.image}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-12 text-center py-4">
+                    <p style={{ color: '#666' }}>Статьи не найдены</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Правая колонка с превью статей */}
-        <div className="col-md-9">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <h4>Статьи</h4>
-            <button 
-              type="button" 
-              className="btn btn-outline-primary"
-              onClick={() => navigate("/likedarts")}
-              style={{ borderRadius: '20px' }}
-            >
-              <img 
-                src="/pelican-magazine/hearth.jpg" 
-                alt="Избранное" 
-                style={{ width: '16px', height: '16px', marginRight: '8px' }} 
-              />
-              Избранное
-            </button>
-          </div>
-          <Article_preview />
         </div>
       </div>
     </div>
