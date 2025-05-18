@@ -35,7 +35,6 @@ const Homereg = () => {
     { id: 12, title: "Арбузы: как отличить спелый от незрелого", author: "Летний Обозреватель", image: "watermelons.jpg" }
   ];
 
-  // Фильтрация статей по поисковому запросу
   const filteredArticles = allArticles.filter(article =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   );

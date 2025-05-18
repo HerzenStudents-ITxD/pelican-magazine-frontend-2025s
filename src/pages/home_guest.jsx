@@ -32,7 +32,6 @@ const Home = () => {
     { id: 9, title: "Клубника: лучшие сорта для вашего сада", author: "Садовод Профи", image: "strawberries.jpg" }
   ];
 
-  // Фильтрация статей по поисковому запросу
   const filteredArticles = allArticles.filter(article =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -122,6 +121,7 @@ const Home = () => {
                         title={article.title}
                         author={article.author}
                         image={article.image}
+                        isGuest={true}
                       />
                     </div>
                   ))
